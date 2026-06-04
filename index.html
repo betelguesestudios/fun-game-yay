@@ -6,9 +6,14 @@
   let velY = 0;
   async function clickedlebaton() {
     while (true) {
-       positionY += velY;
-       velY += 0.2; 
-       baton.style.transform = `translateY(${positionY}px)`;
+        positionY += velY;
+        velY += 0.2; 
+        baton.style.transform = `translateY(${positionY}px)`;
+        const lebox = baton.getBoundingClientRect();
+        if (lebox.bottom >= window.innerHeight) {
+            console.log('lida bida boda butt')
+            velY = 0-velY/1.5;
+        }
     await delay(10);
     }
   }

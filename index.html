@@ -1,8 +1,15 @@
-<html>
-<a onclick=clickedlebaton()>fun game yay</a>
-</html>
+<a id="baton" onclick="clickedlebaton()" style="display: inline-block; cursor: pointer;">fun game yay</a>
 <script>
-    function clickedlebaton() {
-        alert("wowie")
+  const baton = document.getElementById('baton');
+  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+  let positionY = 0;
+  let velY = 0;
+  async function clickedlebaton() {
+    while (true) {
+       positionY += velY;
+       velY += 0.2; 
+       baton.style.transform = `translateY(${positionY}px)`;
+    await delay(10);
     }
+  }
 </script>

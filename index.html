@@ -4,14 +4,88 @@
   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
   let positionY = 0;
   let velY = 0;
+  let yes = 0;
+  let poopy = 0;
+  let coooolscene = 0;
   async function clickedlebaton() {
+    if (yes === 1) {
+      if (poopy === 0) {
+        baton.innerText = "fun ga"
+        const baton2 = document.createElement("a");
+        baton2.style = "display: inline-block; cursor: pointer;"
+        baton2.textContent = "me yay "
+        poopy = 1;
+        document.body.appendChild(baton2);
+        while (true) {
+          baton2.style.transform = `translateY(${positionY}px)`;
+          await delay(10);
+          if (velY === 0.4000000000000001) {
+           coooolscene = 1;
+          }
+        }
+      }
+    }
     while (true) {
         positionY += velY;
         velY += 0.2; 
         baton.style.transform = `translateY(${positionY}px)`;
         const lebox = baton.getBoundingClientRect();
         if (lebox.bottom >= window.innerHeight) {
-            velY = 0-velY/1.7;
+          velY = 0-velY/1.5;
+          yes = 1;
+        }
+        if (coooolscene == 1) {
+          coooolscene = 0;
+          const style = document.createElement('style');
+            style.textContent = `
+            body {
+                margin: 0;
+                overflow: hidden; 
+                background-color: white;
+                transition: background-color 2s ease-in-out;
+                height: 100vh;
+                position: relative;
+            }
+            .sucked-down {
+                transition: transform 1.5s cubic-bezier(0.55, 0.055, 0.675, 0.19), opacity 1.5s ease-in-out !important;
+                transform: translateY(120vh) scaleY(1.5) !important;
+                opacity: 0 !important;
+            }
+            .void-text {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: yellow;
+                opacity: 0;
+                transition: opacity 2.5s ease-in-out;
+                z-index: 9999;
+                text-align: center;
+                white-space: nowrap;
+            }
+            `;
+            document.head.appendChild(style);
+            function triggerTheVoid() {
+            const elements = document.querySelectorAll('body > *:not(script):not(style)');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                el.classList.add('sucked-down');
+                }, index * 30); 
+            });
+            setTimeout(() => {
+                document.body.style.backgroundColor = 'purple';
+            }, 1000);
+            setTimeout(() => {
+                const textNode = document.createElement('div');
+                textNode.className = 'void-text';
+                textNode.innerText = 'cool';
+                document.body.appendChild(textNode);
+                setTimeout(() => {
+                textNode.style.opacity = '1';
+                }, 100);
+            }, 3000);
+            }
+            triggerTheVoid();
         }
     await delay(10);
     }

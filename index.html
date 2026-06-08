@@ -7,6 +7,38 @@
   let yes = 0;
   let poopy = 0;
   let coooolscene = 0;
+  let once = 0;
+  let wowi = 1;
+  async function sigmar() {
+    while (wowi === 1) {
+      const cool = prompt("lalala? (y/n)");
+      if (cool === "y") {
+        alert("yipeeeeea");
+        wowi = 0;
+        
+      } else if (cool === "n") {
+        alert("aw");
+        wowi = 1;
+      } else {
+        alert("not good pls tryagain");
+        wowi = 1;
+      }
+
+    }
+  }
+  async function clickedlecool() {
+    if (once === 0) {
+      once = 1;
+      const wowo = document.createElement('p');
+      wowo.textContent = 'ok';
+      wowo.style.textAlign = 'center';
+      wowo.style.width = '100%';
+      wowo.style.color = 'green';
+      wowo.style.cursor = 'pointer';
+      wowo.addEventListener('click', sigmar);
+      document.body.appendChild(wowo);
+    }
+  }
   async function clickedlebaton() {
     if (yes === 1) {
       if (poopy === 0) {
@@ -79,6 +111,8 @@
                 const textNode = document.createElement('div');
                 textNode.className = 'void-text';
                 textNode.innerText = 'cool';
+                textNode.style.cursor = 'pointer';
+                textNode.addEventListener('click', clickedlecool);
                 document.body.appendChild(textNode);
                 setTimeout(() => {
                 textNode.style.opacity = '1';
